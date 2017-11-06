@@ -1951,17 +1951,6 @@ struct cfg80211_ibss_params {
 };
 
 /**
- * struct cfg80211_bss_select_adjust - BSS selection with RSSI adjustment.
- *
- * @band: band of BSS which should match for RSSI level adjustment.
- * @delta: value of RSSI level adjustment.
- */
-struct cfg80211_bss_select_adjust {
-	enum ieee80211_band band;
-	s8 delta;
-};
-
-/**
  * struct cfg80211_bss_selection - connection parameters for BSS selection.
  *
  * @behaviour: requested BSS selection behaviour.
