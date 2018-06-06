@@ -4142,7 +4142,6 @@ WMITLV_CREATE_PARAM_STRUC(WMI_HOST_SWBA_EVENTID);
 
 WMITLV_CREATE_PARAM_STRUC(WMI_HOST_SWBA_V2_EVENTID);
 
-
 /* HOST SWFDA Event  requesting host to queue a FILS Discovery frame for transmission */
 #define WMITLV_TABLE_WMI_HOST_SWFDA_EVENTID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_host_swfda_event_fixed_param, wmi_host_swfda_event_fixed_param, fixed_param, WMITLV_SIZE_FIX) \

@@ -22696,7 +22696,6 @@ typedef struct {
     A_INT32  tx_power;      /* TX power for the specified HALPHY parameters in half dBm unit */
 } wmi_get_tpc_power_evt_fixed_param;
 
-
 /* ADD NEW DEFS HERE */
 
 
