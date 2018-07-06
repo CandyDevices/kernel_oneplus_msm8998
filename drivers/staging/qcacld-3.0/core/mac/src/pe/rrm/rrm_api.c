@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2017 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2018 The Linux Foundation. All rights reserved.
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -268,7 +272,11 @@ rrm_process_link_measurement_request(tpAniSirGlobal pMac,
 	}
 	pHdr = WMA_GET_RX_MAC_HEADER(pRxPacketInfo);
 
+<<<<<<< HEAD
 	LinkReport.txPower = lim_get_max_tx_power(pSessionEntry->maxTxPower,
+=======
+	LinkReport.txPower = lim_get_max_tx_power(pSessionEntry->def_max_tx_pwr,
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 						pLinkReq->MaxTxPower.maxTxPower,
 						  pMac->roam.configParam.
 						  nTxPowerCap);

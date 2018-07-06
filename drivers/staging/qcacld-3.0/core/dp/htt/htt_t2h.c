@@ -421,7 +421,20 @@ static void htt_t2h_lp_msg_handler(void *context, qdf_nbuf_t htt_t2h_msg,
 #ifndef REMOVE_PKT_LOG
 	case HTT_T2H_MSG_TYPE_PKTLOG:
 	{
+<<<<<<< HEAD
 		pktlog_process_fw_msg(msg_word + 1);
+=======
+		uint32_t len = qdf_nbuf_len(htt_t2h_msg);
+
+		if (len < sizeof(*msg_word) + sizeof(uint32_t)) {
+			qdf_print("%s: invalid nbuff len \n", __func__);
+			WARN_ON(1);
+			break;
+		}
+
+		/*len is reduced by sizeof(*msg_word)*/
+		pktlog_process_fw_msg(msg_word + 1, len - sizeof(*msg_word));
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 		break;
 	}
 #endif

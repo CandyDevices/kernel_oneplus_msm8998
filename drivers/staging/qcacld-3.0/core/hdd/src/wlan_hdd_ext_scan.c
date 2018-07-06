@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2017 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2018 The Linux Foundation. All rights reserved.
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -4021,6 +4025,16 @@ int wlan_hdd_cfg80211_set_epno_list(struct wiphy *wiphy,
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+#define PARAM_ID QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ID
+#define PARAM_REALM QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_REALM
+#define PARAM_ROAM_ID \
+	QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ROAM_CNSRTM_ID
+#define PARAM_ROAM_PLMN \
+	QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ROAM_PLMN
+
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 /**
  * hdd_extscan_passpoint_fill_network_list() - passpoint fill network list
  * @hddctx: HDD context
@@ -4039,7 +4053,12 @@ static int hdd_extscan_passpoint_fill_network_list(
 {
 	struct nlattr *network[QCA_WLAN_VENDOR_ATTR_PNO_MAX + 1];
 	struct nlattr *networks;
+<<<<<<< HEAD
 	int rem1, len;
+=======
+	int rem1;
+	size_t len;
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	uint8_t index;
 	uint32_t expected_networks;
 
@@ -4068,6 +4087,7 @@ static int hdd_extscan_passpoint_fill_network_list(
 		}
 
 		/* Parse and fetch identifier */
+<<<<<<< HEAD
 		if (!network[QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ID]) {
 			hdd_err("attr passpoint id failed");
 			return -EINVAL;
@@ -4095,22 +4115,63 @@ static int hdd_extscan_passpoint_fill_network_list(
 
 		/* Parse and fetch roaming consortium ids */
 		if (!network[QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ROAM_CNSRTM_ID]) {
+=======
+		if (!network[PARAM_ID]) {
+			hdd_err("attr passpoint id failed");
+			return -EINVAL;
+		}
+		req_msg->networks[index].id = nla_get_u32(network[PARAM_ID]);
+		hdd_debug("Id %u", req_msg->networks[index].id);
+
+		/* Parse and fetch realm */
+		if (!network[PARAM_REALM]) {
+			hdd_err("attr realm failed");
+			return -EINVAL;
+		}
+		len = nla_strlcpy(req_msg->networks[index].realm,
+				  network[PARAM_REALM],
+				  SIR_PASSPOINT_REALM_LEN);
+		/* Don't send partial realm to firmware */
+		if (len >= SIR_PASSPOINT_REALM_LEN) {
+			hdd_err("user passed invalid realm, len:%zu", len);
+			return -EINVAL;
+		}
+
+		hdd_debug("realm: %s", req_msg->networks[index].realm);
+
+		/* Parse and fetch roaming consortium ids */
+		if (!network[PARAM_ROAM_ID]) {
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 			hdd_err("attr roaming consortium ids failed");
 			return -EINVAL;
 		}
 		nla_memcpy(&req_msg->networks[index].roaming_consortium_ids,
+<<<<<<< HEAD
 			network[QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ROAM_CNSRTM_ID],
 			sizeof(req_msg->networks[0].roaming_consortium_ids));
 		hdd_debug("roaming consortium ids");
 
 		/* Parse and fetch plmn */
 		if (!network[QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ROAM_PLMN]) {
+=======
+			   network[PARAM_ROAM_ID],
+			   sizeof(req_msg->networks[0].roaming_consortium_ids));
+		hdd_debug("roaming consortium ids");
+
+		/* Parse and fetch plmn */
+		if (!network[PARAM_ROAM_PLMN]) {
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 			hdd_err("attr plmn failed");
 			return -EINVAL;
 		}
 		nla_memcpy(&req_msg->networks[index].plmn,
+<<<<<<< HEAD
 			network[QCA_WLAN_VENDOR_ATTR_PNO_PASSPOINT_NETWORK_PARAM_ROAM_PLMN],
 			SIR_PASSPOINT_PLMN_LEN);
+=======
+			   network[PARAM_ROAM_PLMN],
+			   SIR_PASSPOINT_PLMN_LEN);
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 		hdd_debug("plmn %02x:%02x:%02x)",
 			req_msg->networks[index].plmn[0],
 			req_msg->networks[index].plmn[1],
@@ -4345,6 +4406,14 @@ int wlan_hdd_cfg80211_reset_passpoint_list(struct wiphy *wiphy,
 	return ret;
 }
 
+<<<<<<< HEAD
+=======
+#undef PARAM_ID
+#undef PARAM_REALM
+#undef PARAM_ROAM_ID
+#undef PARAM_ROAM_PLMN
+
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 /**
  * wlan_hdd_init_completion_extwow() - Initialize ext wow variable
  * @hdd_ctx: Global HDD context

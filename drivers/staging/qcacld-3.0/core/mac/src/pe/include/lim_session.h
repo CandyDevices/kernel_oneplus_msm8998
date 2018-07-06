@@ -509,6 +509,10 @@ typedef struct sPESession       /* Added to Support BT-AMP */
 	bool ch_switch_in_progress;
 	/* previous auth frame's sequence number */
 	uint16_t prev_auth_seq_num;
+<<<<<<< HEAD
+=======
+	int8_t def_max_tx_pwr;
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 } tPESession, *tpPESession;
 
 /*-------------------------------------------------------------------------

@@ -36,7 +36,11 @@
 #define __WMI_VER_MINOR_    0
 /** WMI revision number has to be incremented when there is a
  *  change that may or may not break compatibility. */
+<<<<<<< HEAD
 #define __WMI_REVISION_ 510
+=======
+#define __WMI_REVISION_ 530
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 
 /** The Version Namespace should not be normally changed. Only
  *  host and firmware of the same WMI namespace will work
