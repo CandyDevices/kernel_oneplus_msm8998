@@ -405,10 +405,13 @@ static int __hdd_hostapd_stop(struct net_device *dev)
 	hdd_stop_adapter(hdd_ctx, adapter, true);
 
 	clear_bit(DEVICE_IFACE_OPENED, &adapter->event_flags);
+<<<<<<< HEAD
+=======
 
 	if (!hdd_is_cli_iface_up(hdd_ctx))
 		sme_scan_flush_result(hdd_ctx->hHal);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	/* Stop all tx queues */
 	hdd_info("Disabling queues");
 	wlan_hdd_netif_queue_control(adapter,
@@ -1547,7 +1550,11 @@ QDF_STATUS hdd_hostapd_sap_event_cb(tpSap_Event pSapEvent,
 	struct ch_params_s sap_ch_param = {0};
 	eCsrPhyMode phy_mode;
 	bool legacy_phymode;
+<<<<<<< HEAD
+	tSap_StationDisassocCompleteEvent *disconnect_event;
+=======
 	tSap_StationDisassocCompleteEvent *disassoc_comp;
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	hdd_station_info_t *stainfo;
 	cds_context_type *cds_ctx;
 
@@ -2157,6 +2164,36 @@ QDF_STATUS hdd_hostapd_sap_event_cb(tpSap_Event pSapEvent,
 		hdd_green_ap_add_sta(pHddCtx);
 		break;
 
+<<<<<<< HEAD
+	case eSAP_STA_LOSTLINK_DETECTED:
+		disconnect_event =
+			&pSapEvent->sapevt.sapStationDisassocCompleteEvent;
+
+		wlan_hdd_get_peer_rssi(pHostapdAdapter,
+				       &disconnect_event->staMac,
+				       HDD_WLAN_GET_PEER_RSSI_SOURCE_DRIVER);
+
+		/*
+		 * For user initiated disconnect, reason_code is updated while
+		 * issuing the disconnect from HDD.
+		 */
+		if (disconnect_event->reason != eSAP_USR_INITATED_DISASSOC) {
+			stainfo = hdd_get_stainfo(
+					pHostapdAdapter->cache_sta_info,
+					disconnect_event->staMac);
+			if (stainfo)
+				stainfo->reason_code =
+					disconnect_event->reason_code;
+		}
+		return QDF_STATUS_SUCCESS;
+
+	case eSAP_STA_DISASSOC_EVENT:
+		memcpy(wrqu.addr.sa_data,
+		       &pSapEvent->sapevt.sapStationDisassocCompleteEvent.
+		       staMac, QDF_MAC_ADDR_SIZE);
+		hdd_notice(" disassociated " MAC_ADDRESS_STR,
+		       MAC_ADDR_ARRAY(wrqu.addr.sa_data));
+=======
 	case eSAP_STA_DISASSOC_EVENT:
 		disassoc_comp =
 			&pSapEvent->sapevt.sapStationDisassocCompleteEvent;
@@ -2172,6 +2209,7 @@ QDF_STATUS hdd_hostapd_sap_event_cb(tpSap_Event pSapEvent,
 			stainfo->rx_rate = disassoc_comp->rx_rate;
 			stainfo->reason_code = disassoc_comp->reason_code;
 		}
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 
 		qdf_status = qdf_event_set(&pHostapdState->qdf_sta_disassoc_event);
 		if (!QDF_IS_STATUS_SUCCESS(qdf_status))
@@ -4452,6 +4490,10 @@ static __iw_softap_disassoc_sta(struct net_device *dev,
 	uint8_t *peerMacAddr;
 	int ret;
 	struct tagCsrDelStaParams del_sta_params;
+<<<<<<< HEAD
+	hdd_station_info_t *stainfo;
+=======
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 
 	ENTER_DEV(dev);
 
@@ -4478,6 +4520,14 @@ static __iw_softap_disassoc_sta(struct net_device *dev,
 			&del_sta_params);
 	hdd_softap_sta_disassoc(pHostapdAdapter, &del_sta_params);
 
+<<<<<<< HEAD
+	stainfo = hdd_get_stainfo(pHostapdAdapter->cache_sta_info,
+				  del_sta_params.peerMacAddr);
+	if (stainfo)
+		stainfo->reason_code = del_sta_params.reason_code;
+
+=======
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	EXIT();
 	return 0;
 }
@@ -5217,7 +5267,11 @@ static int __iw_get_ap_freq(struct net_device *dev,
 			return -EIO;
 		}
 		status = hdd_wlan_get_freq(channel, &freq);
+<<<<<<< HEAD
+		if (true == status) {
+=======
 		if (0 == status) {
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 			/* Set Exponent parameter as 6 (MHZ) in struct
 			 * iw_freq * iwlist & iwconfig command
 			 * shows frequency into proper
@@ -5229,7 +5283,11 @@ static int __iw_get_ap_freq(struct net_device *dev,
 	} else {
 		channel = pHddApCtx->operatingChannel;
 		status = hdd_wlan_get_freq(channel, &freq);
+<<<<<<< HEAD
+		if (true == status) {
+=======
 		if (0 == status) {
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 			/* Set Exponent parameter as 6 (MHZ) in struct iw_freq
 			 * iwlist & iwconfig command shows frequency into proper
 			 * format (2.412 GHz instead of 246.2 MHz)
@@ -7785,6 +7843,8 @@ static inline int wlan_hdd_set_udp_resp_offload(hdd_adapter_t *padapter,
 }
 #endif
 
+<<<<<<< HEAD
+=======
 static void hdd_check_and_disconnect_sta_on_invalid_channel(
 		hdd_context_t *hdd_ctx)
 {
@@ -7984,6 +8044,7 @@ static int wlan_hdd_disable_channels(hdd_context_t *hdd_ctx)
 	return status;
 }
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 /**
  * wlan_hdd_cfg80211_start_bss() - start bss
  * @pHostapdAdapter: Pointer to hostapd adapter
@@ -8025,7 +8086,10 @@ int wlan_hdd_cfg80211_start_bss(hdd_adapter_t *pHostapdAdapter,
 	enum dfs_mode mode;
 	bool disable_fw_tdls_state = false;
 	uint8_t ignore_cac = 0;
+<<<<<<< HEAD
+=======
 	hdd_adapter_t *sta_adapter;
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 
 	ENTER();
 
@@ -8042,6 +8106,8 @@ int wlan_hdd_cfg80211_start_bss(hdd_adapter_t *pHostapdAdapter,
 		}
 	}
 
+<<<<<<< HEAD
+=======
 	/*
 	 * For STA+SAP concurrency support from GUI, first STA connection gets
 	 * triggered and while it is in progress, SAP start also comes up.
@@ -8066,6 +8132,7 @@ int wlan_hdd_cfg80211_start_bss(hdd_adapter_t *pHostapdAdapter,
 		wlan_hdd_disconnect(sta_adapter, eCSR_DISCONNECT_REASON_DEAUTH);
 	}
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	sme_config = qdf_mem_malloc(sizeof(tSmeConfigParams));
 	if (!sme_config) {
 		hdd_err("failed to allocate memory");
@@ -8090,6 +8157,8 @@ int wlan_hdd_cfg80211_start_bss(hdd_adapter_t *pHostapdAdapter,
 		}
 	}
 
+<<<<<<< HEAD
+=======
 	if (pHostapdAdapter->device_mode == QDF_SAP_MODE) {
 		/*
 		 * Disable the channels received in command
@@ -8101,6 +8170,7 @@ int wlan_hdd_cfg80211_start_bss(hdd_adapter_t *pHostapdAdapter,
 		hdd_check_and_disconnect_sta_on_invalid_channel(pHddCtx);
 	}
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	pConfig = &pHostapdAdapter->sessionCtx.ap.sapConfig;
 
 	pBeacon = pHostapdAdapter->sessionCtx.ap.beacon;
@@ -8702,8 +8772,11 @@ int wlan_hdd_cfg80211_start_bss(hdd_adapter_t *pHostapdAdapter,
 error:
 	if (sme_config)
 		qdf_mem_free(sme_config);
+<<<<<<< HEAD
+=======
 	if (pHostapdAdapter->device_mode == QDF_SAP_MODE)
 		wlan_hdd_restore_channels(pHddCtx);
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	/* Revert the indoor to passive marking if START BSS fails */
 	if (iniConfig->disable_indoor_channel) {
 		hdd_update_indoor_channel(pHddCtx, false);
@@ -8785,6 +8858,8 @@ static int __wlan_hdd_cfg80211_stop_ap(struct wiphy *wiphy,
 	if (0 != ret)
 		return ret;
 
+<<<<<<< HEAD
+=======
 	/*
 	 * If a STA connection is in progress in another adapter, disconnect
 	 * the STA and complete the SAP operation. STA will reconnect
@@ -8797,6 +8872,7 @@ static int __wlan_hdd_cfg80211_stop_ap(struct wiphy *wiphy,
 		wlan_hdd_disconnect(staAdapter, eCSR_DISCONNECT_REASON_DEAUTH);
 	}
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	if (pAdapter->device_mode == QDF_SAP_MODE) {
 		wlan_hdd_del_station(pAdapter);
 		hdd_green_ap_stop_bss(pHddCtx);

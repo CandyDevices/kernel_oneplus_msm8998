@@ -10882,11 +10882,14 @@ static int __wlan_hdd_cfg80211_set_nud_stats(struct wiphy *wiphy,
 
 	ENTER();
 
+<<<<<<< HEAD
+=======
 	if (QDF_GLOBAL_FTM_MODE == hdd_get_conparam()) {
 		hdd_err("Command not allowed in FTM mode");
 		return -EINVAL;
 	}
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	err = wlan_hdd_validate_context(hdd_ctx);
 	if (0 != err)
 		return err;
@@ -11474,11 +11477,14 @@ static int __wlan_hdd_cfg80211_get_nud_stats(struct wiphy *wiphy,
 
 	ENTER();
 
+<<<<<<< HEAD
+=======
 	if (QDF_GLOBAL_FTM_MODE == hdd_get_conparam()) {
 		hdd_err("Command not allowed in FTM mode");
 		return -EINVAL;
 	}
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	err = wlan_hdd_validate_context(hdd_ctx);
 	if (0 != err)
 		return err;
@@ -14196,10 +14202,26 @@ static bool wlan_hdd_is_duplicate_channel(uint8_t *arr,
 }
 #endif
 
+<<<<<<< HEAD
+/*
+ *wlan_hdd_send_sta_authorized_event: Function to send station authorized
+ *event to user space in case of SAP
+ *pAdapter: Pointer to the adapter
+ *@pHddCtx: HDD Context
+ *@mac_addr: MAC address of the STA for whic the Authorized event needs to
+ *be sent
+ *This api is used to send station authorized event to user space
+ */
+static QDF_STATUS wlan_hdd_send_sta_authorized_event(
+						hdd_adapter_t *pAdapter,
+						hdd_context_t *pHddCtx,
+						struct qdf_mac_addr mac_addr)
+=======
 QDF_STATUS wlan_hdd_send_sta_authorized_event(
 					hdd_adapter_t *pAdapter,
 					hdd_context_t *pHddCtx,
 					const struct qdf_mac_addr *mac_addr)
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 {
 	struct sk_buff *vendor_event;
 	uint32_t sta_flags = 0;
@@ -14235,7 +14257,11 @@ QDF_STATUS wlan_hdd_send_sta_authorized_event(
 	}
 	status = nla_put(vendor_event,
 			 QCA_WLAN_VENDOR_ATTR_LINK_PROPERTIES_STA_MAC,
+<<<<<<< HEAD
+			 QDF_MAC_ADDR_SIZE, mac_addr.bytes);
+=======
 			 QDF_MAC_ADDR_SIZE, mac_addr->bytes);
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	if (status) {
 		hdd_err("STA MAC put fails");
 		kfree_skb(vendor_event);
@@ -14322,7 +14348,11 @@ static int __wlan_hdd_change_station(struct wiphy *wiphy,
 			status = wlan_hdd_send_sta_authorized_event(
 								pAdapter,
 								pHddCtx,
+<<<<<<< HEAD
+								STAMacAddress);
+=======
 								&STAMacAddress);
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 			if (status != QDF_STATUS_SUCCESS) {
 				return -EINVAL;
 			}
@@ -17651,7 +17681,20 @@ static int wlan_hdd_cfg80211_connect(struct wiphy *wiphy,
 	return ret;
 }
 
+<<<<<<< HEAD
+/**
+ * wlan_hdd_disconnect() - hdd disconnect api
+ * @pAdapter: Pointer to adapter
+ * @reason: Disconnect reason code
+ *
+ * This function is used to issue a disconnect request to SME
+ *
+ * Return: 0 for success, non-zero for failure
+ */
+static int wlan_hdd_disconnect(hdd_adapter_t *pAdapter, u16 reason)
+=======
 int wlan_hdd_disconnect(hdd_adapter_t *pAdapter, u16 reason)
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 {
 	int status, result = 0;
 	unsigned long rc;
@@ -18705,6 +18748,11 @@ int __wlan_hdd_cfg80211_del_station(struct wiphy *wiphy,
 			}
 
 			pAdapter->aStaInfo[staId].isDeauthInProgress = true;
+<<<<<<< HEAD
+			pAdapter->cache_sta_info[staId].reason_code =
+				pDelStaParams->reason_code;
+=======
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 
 			hdd_debug("Delete STA with MAC::" MAC_ADDRESS_STR,
 			       MAC_ADDR_ARRAY(mac));

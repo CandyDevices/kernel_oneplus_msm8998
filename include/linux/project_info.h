@@ -11,7 +11,6 @@ typedef     __u8        uint8;
 extern uint32_t chip_serial_num;
 extern unsigned long totalram_pages;
 
-
 struct project_info {
 	char project_name[8];
 	uint32  hw_version;

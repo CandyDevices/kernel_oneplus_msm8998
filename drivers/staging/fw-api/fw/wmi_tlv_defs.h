@@ -909,12 +909,15 @@ typedef enum {
     WMITLV_TAG_STRUC_wmi_twt_del_dialog_complete_event_fixed_param,
     WMITLV_TAG_STRUC_wmi_twt_pause_dialog_complete_event_fixed_param,
     WMITLV_TAG_STRUC_wmi_twt_resume_dialog_complete_event_fixed_param,
+<<<<<<< HEAD
+=======
     WMITLV_TAG_STRUC_wmi_request_roam_scan_stats_cmd_fixed_param,
     WMITLV_TAG_STRUC_wmi_roam_scan_stats_event_fixed_param,
     WMITLV_TAG_STRUC_wmi_peer_tid_configurations_cmd_fixed_param,
     WMITLV_TAG_STRUC_wmi_vdev_set_custom_sw_retry_th_cmd_fixed_param,
     WMITLV_TAG_STRUC_wmi_get_tpc_power_cmd_fixed_param,
     WMITLV_TAG_STRUC_wmi_get_tpc_power_evt_fixed_param,
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 } WMITLV_TAG_ID;
 
 /*
@@ -1284,10 +1287,13 @@ typedef enum {
     OP(WMI_TWT_DEL_DIALOG_CMDID) \
     OP(WMI_TWT_PAUSE_DIALOG_CMDID) \
     OP(WMI_TWT_RESUME_DIALOG_CMDID) \
+<<<<<<< HEAD
+=======
     OP(WMI_REQUEST_ROAM_SCAN_STATS_CMDID) \
     OP(WMI_PEER_TID_CONFIGURATIONS_CMDID) \
     OP(WMI_VDEV_SET_CUSTOM_SW_RETRY_TH_CMDID) \
     OP(WMI_GET_TPC_POWER_CMDID) \
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
     /* add new CMD_LIST elements above this line */
 
 
@@ -1493,8 +1499,11 @@ typedef enum {
     OP(WMI_TWT_DEL_DIALOG_COMPLETE_EVENTID) \
     OP(WMI_TWT_PAUSE_DIALOG_COMPLETE_EVENTID) \
     OP(WMI_TWT_RESUME_DIALOG_COMPLETE_EVENTID) \
+<<<<<<< HEAD
+=======
     OP(WMI_ROAM_SCAN_STATS_EVENTID) \
     OP(WMI_GET_TPC_POWER_EVENTID) \
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
     /* add new EVT_LIST elements above this line */
 
 
@@ -2395,12 +2404,15 @@ WMITLV_CREATE_PARAM_STRUC(WMI_VDEV_GET_TX_POWER_CMDID);
 
 WMITLV_CREATE_PARAM_STRUC(WMI_VDEV_LIMIT_OFFCHAN_CMDID);
 
+<<<<<<< HEAD
+=======
 /* vdev per-AC SW retry configuration cmd */
 #define WMITLV_TABLE_WMI_VDEV_SET_CUSTOM_SW_RETRY_TH_CMDID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_vdev_set_custom_sw_retry_th_cmd_fixed_param, wmi_vdev_set_custom_sw_retry_th_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 
 WMITLV_CREATE_PARAM_STRUC(WMI_VDEV_SET_CUSTOM_SW_RETRY_TH_CMDID);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 /* PDEV Set Base Mac Address Cmd */
 #define WMITLV_TABLE_WMI_PDEV_SET_BASE_MACADDR_CMDID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_pdev_set_base_macaddr_cmd_fixed_param, wmi_pdev_set_base_macaddr_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
@@ -2876,12 +2888,15 @@ WMITLV_CREATE_PARAM_STRUC(WMI_LPI_START_SCAN_CMDID);
 
 WMITLV_CREATE_PARAM_STRUC(WMI_LPI_STOP_SCAN_CMDID);
 
+<<<<<<< HEAD
+=======
 /* Request for roam stats Cmd */
 #define WMITLV_TABLE_WMI_REQUEST_ROAM_SCAN_STATS_CMDID(id,op,buf,len) \
   WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_request_roam_scan_stats_cmd_fixed_param, wmi_request_roam_scan_stats_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 
 WMITLV_CREATE_PARAM_STRUC(WMI_REQUEST_ROAM_SCAN_STATS_CMDID);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 #define WMITLV_TABLE_WMI_LPI_RESULT_EVENTID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_lpi_result_event_fixed_param, wmi_lpi_result_event_fixed_param, fixed_param, WMITLV_SIZE_FIX) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_BYTE, A_UINT8, data, WMITLV_SIZE_VAR)
@@ -3670,12 +3685,15 @@ WMITLV_CREATE_PARAM_STRUC(WMI_PDEV_SET_RX_FILTER_PROMISCUOUS_CMDID);
 
 WMITLV_CREATE_PARAM_STRUC(WMI_RUNTIME_DPD_RECAL_CMDID);
 
+<<<<<<< HEAD
+=======
 /** Get TX power Cmd */
 #define WMITLV_TABLE_WMI_GET_TPC_POWER_CMDID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_get_tpc_power_cmd_fixed_param, wmi_get_tpc_power_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 
 WMITLV_CREATE_PARAM_STRUC(WMI_GET_TPC_POWER_CMDID);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 /* TWT enable cmd */
 #define WMITLV_TABLE_WMI_TWT_ENABLE_CMDID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_twt_enable_cmd_fixed_param, wmi_twt_enable_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
@@ -3706,11 +3724,14 @@ WMITLV_CREATE_PARAM_STRUC(WMI_TWT_PAUSE_DIALOG_CMDID);
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_twt_resume_dialog_cmd_fixed_param, wmi_twt_resume_dialog_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 WMITLV_CREATE_PARAM_STRUC(WMI_TWT_RESUME_DIALOG_CMDID);
 
+<<<<<<< HEAD
+=======
 /* Set peer tid configurations Cmd */
 #define WMITLV_TABLE_WMI_PEER_TID_CONFIGURATIONS_CMDID(id,op,buf,len) \
   WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_peer_tid_configurations_cmd_fixed_param, wmi_peer_tid_configurations_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 WMITLV_CREATE_PARAM_STRUC(WMI_PEER_TID_CONFIGURATIONS_CMDID);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 
 /************************** TLV definitions of WMI events *******************************/
 
@@ -3875,8 +3896,12 @@ WMITLV_CREATE_PARAM_STRUC(WMI_OFFCHAN_DATA_TX_COMPLETION_EVENTID);
 #define WMITLV_TABLE_WMI_MGMT_TX_BUNDLE_COMPLETION_EVENTID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_mgmt_tx_compl_bundle_event_fixed_param, wmi_mgmt_tx_compl_bundle_event_fixed_param, fixed_param, WMITLV_SIZE_FIX) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_UINT32, A_UINT32, desc_ids, WMITLV_SIZE_VAR) \
+<<<<<<< HEAD
+    WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_UINT32, A_UINT32, status, WMITLV_SIZE_VAR)
+=======
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_UINT32, A_UINT32, status, WMITLV_SIZE_VAR) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_UINT32, A_UINT32, ppdu_id, WMITLV_SIZE_VAR)
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 WMITLV_CREATE_PARAM_STRUC(WMI_MGMT_TX_BUNDLE_COMPLETION_EVENTID);
 
 /* VDEV Start response Event */
@@ -4009,11 +4034,14 @@ WMITLV_CREATE_PARAM_STRUC(WMI_PDEV_FTM_INTG_EVENTID);
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_vdev_get_keepalive_event_fixed_param, wmi_vdev_get_keepalive_event_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 WMITLV_CREATE_PARAM_STRUC(WMI_VDEV_GET_KEEPALIVE_EVENTID);
 
+<<<<<<< HEAD
+=======
 /** Get TX power Event */
 #define WMITLV_TABLE_WMI_GET_TPC_POWER_EVENTID(id,op,buf,len)  \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_get_tpc_power_evt_fixed_param, wmi_get_tpc_power_evt_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 WMITLV_CREATE_PARAM_STRUC(WMI_GET_TPC_POWER_EVENTID);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 /* GPIO Input Event */
 #define WMITLV_TABLE_WMI_GPIO_INPUT_EVENTID(id,op,buf,len)  \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_gpio_input_event_fixed_param, wmi_gpio_input_event_fixed_param, fixed_param, WMITLV_SIZE_FIX)
@@ -4133,6 +4161,8 @@ WMITLV_CREATE_PARAM_STRUC(WMI_OEM_DMA_BUF_RELEASE_EVENTID);
 
 WMITLV_CREATE_PARAM_STRUC(WMI_HOST_SWBA_EVENTID);
 
+<<<<<<< HEAD
+=======
 /* HOST SWBA Event v2 */
 #define WMITLV_TABLE_WMI_HOST_SWBA_V2_EVENTID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_host_swba_event_fixed_param, wmi_host_swba_event_fixed_param, fixed_param, WMITLV_SIZE_FIX) \
@@ -4143,6 +4173,7 @@ WMITLV_CREATE_PARAM_STRUC(WMI_HOST_SWBA_EVENTID);
 WMITLV_CREATE_PARAM_STRUC(WMI_HOST_SWBA_V2_EVENTID);
 
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 /* HOST SWFDA Event  requesting host to queue a FILS Discovery frame for transmission */
 #define WMITLV_TABLE_WMI_HOST_SWFDA_EVENTID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_host_swfda_event_fixed_param, wmi_host_swfda_event_fixed_param, fixed_param, WMITLV_SIZE_FIX) \
@@ -4976,6 +5007,8 @@ WMITLV_CREATE_PARAM_STRUC(WMI_TWT_PAUSE_DIALOG_COMPLETE_EVENTID);
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_twt_resume_dialog_complete_event_fixed_param, wmi_twt_resume_dialog_complete_event_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 WMITLV_CREATE_PARAM_STRUC(WMI_TWT_RESUME_DIALOG_COMPLETE_EVENTID);
 
+<<<<<<< HEAD
+=======
 /* Event to send roam scan stats */
 #define WMITLV_TABLE_WMI_ROAM_SCAN_STATS_EVENTID(id,op,buf,len) \
   WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_roam_scan_stats_event_fixed_param, wmi_roam_scan_stats_event_fixed_param, fixed_param, WMITLV_SIZE_FIX) \
@@ -4994,6 +5027,7 @@ WMITLV_CREATE_PARAM_STRUC(WMI_TWT_RESUME_DIALOG_COMPLETE_EVENTID);
   WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_UINT32, A_UINT32, rssi, WMITLV_SIZE_VAR)
 WMITLV_CREATE_PARAM_STRUC(WMI_ROAM_SCAN_STATS_EVENTID);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 
 #ifdef __cplusplus
 }

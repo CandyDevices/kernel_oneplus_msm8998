@@ -5256,6 +5256,8 @@ struct reg_table_entry g_registry_table[] = {
 		     CFG_OFFLOAD_NEIGHBOR_REPORT_MAX_REQ_CAP_DEFAULT,
 		     CFG_OFFLOAD_NEIGHBOR_REPORT_MAX_REQ_CAP_MIN,
 		     CFG_OFFLOAD_NEIGHBOR_REPORT_MAX_REQ_CAP_MAX),
+<<<<<<< HEAD
+=======
 
 	REG_VARIABLE(CFG_TX_SCH_DELAY_NAME,
 		     WLAN_PARAM_Integer,
@@ -5264,6 +5266,7 @@ struct reg_table_entry g_registry_table[] = {
 		     CFG_TX_SCH_DELAY_DEFAULT,
 		     CFG_TX_SCH_DELAY_MIN,
 		     CFG_TX_SCH_DELAY_MAX),
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 };
 
 /**
@@ -7056,10 +7059,13 @@ void hdd_cfg_print(hdd_context_t *pHddCtx)
 			CFG_OCE_WAN_SCORE_IDX15_TO_12_NAME,
 			pHddCtx->config->oce_wan_score_slots15_to_12);
 
+<<<<<<< HEAD
+=======
 	hdd_debug("Name = [%s] value = [%d]",
 		  CFG_TX_SCH_DELAY_NAME,
 		  pHddCtx->config->enable_tx_sch_delay);
 
+>>>>>>> e9b3420c1d7a73d24326ca24f8ab222f4a03c41f
 	hdd_cfg_print_11k_offload_params(pHddCtx);
 }
 
