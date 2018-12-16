@@ -16,6 +16,10 @@
 #include <linux/syscalls.h>
 #include <linux/syscore_ops.h>
 #include <linux/uaccess.h>
+#ifdef CONFIG_QCOM_DLOAD_MODE
+#include <linux/delay.h>
+#include <linux/oem_force_dump.h>
+#endif
 
 /*
  * this indicates whether you can reboot with ctrl-alt-del: the default is yes
@@ -220,6 +224,19 @@ void kernel_restart(char *cmd)
 		pr_emerg("Restarting system\n");
 	else
 		pr_emerg("Restarting system with command '%s'\n", cmd);
+
+#ifdef CONFIG_QCOM_DLOAD_MODE
+	/*if enable dump, if dm-verity device corrupted, force enter dump */
+	if (oem_get_download_mode()) {
+		if (((cmd != NULL && cmd[0] != '\0') &&
+		!strcmp(cmd, "dm-verity device corrupted"))) {
+			panic("dm-verity device corrupted Force Dump");
+			pr_emerg("Restarting system painc\n");
+			msleep(10000);
+		}
+	}
+#endif
+
 	kmsg_dump(KMSG_DUMP_RESTART);
 	machine_restart(cmd);
 }

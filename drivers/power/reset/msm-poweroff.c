@@ -100,6 +100,13 @@ struct reset_attribute {
 module_param_call(download_mode, dload_set, param_get_int,
 			&download_mode, 0644);
 
+#ifdef CONFIG_QCOM_DLOAD_MODE
+int oem_get_download_mode(void)
+{
+	return download_mode;
+}
+#endif
+
 static int panic_prep_restart(struct notifier_block *this,
 			      unsigned long event, void *ptr)
 {
@@ -148,6 +155,14 @@ static void set_dload_mode(int on)
 	ret = scm_set_dload_mode(on ? dload_type : 0, 0);
 	if (ret)
 		pr_err("Failed to set secure DLOAD mode: %d\n", ret);
+#ifdef CONFIG_QCOM_DLOAD_MODE
+	if (on)
+		qpnp_pon_set_restart_reason(0x00);
+	else
+		qpnp_pon_set_restart_reason(PON_RESTART_REASON_PANIC);
+	if (!on)
+		scm_disable_sdi();
+#endif
 
 	dload_mode_enabled = on;
 }
@@ -271,6 +286,9 @@ static void halt_spmi_pmic_arbiter(void)
 static void msm_restart_prepare(const char *cmd)
 {
 	bool need_warm_reset = false;
+#ifdef CONFIG_QCOM_DLOAD_MODE
+	bool oem_panic_record = false;
+#endif
 
 #ifdef CONFIG_QCOM_DLOAD_MODE
 
@@ -293,6 +311,14 @@ static void msm_restart_prepare(const char *cmd)
 		need_warm_reset = (get_dload_mode() ||
 				(cmd != NULL && cmd[0] != '\0'));
 	}
+#ifdef CONFIG_QCOM_DLOAD_MODE
+	if (!download_mode &&
+			(in_panic || restart_mode == RESTART_DLOAD)) {
+		oem_panic_record = true;
+	}
+	qpnp_pon_set_restart_reason(0x00);
+	need_warm_reset == need_warm_reset || oem_panic_record;
+#endif
 
 	/* Hard reset the PMIC unless memory contents must be maintained. */
 	if (need_warm_reset) {
@@ -357,6 +383,12 @@ static void msm_restart_prepare(const char *cmd)
 		}
 	}
 
+#ifdef CONFIG_QCOM_DLOAD_MODE
+	if (oem_panic_record) {
+		qpnp_pon_set_restart_reason(PON_RESTART_REASON_PANIC);
+		__raw_writel(OEM_PANIC, restart_reason);
+	}
+#endif
 	flush_cache_all();
 
 	/*outer_flush_all is not supported by 64bit kernel*/
@@ -418,6 +450,9 @@ static void do_msm_poweroff(void)
 	pr_notice("Powering off the SoC\n");
 
 	set_dload_mode(0);
+#ifdef CONFIG_QCOM_DLOAD_MODE
+	qpnp_pon_set_restart_reason(0x00);
+#endif
 	scm_disable_sdi();
 	qpnp_pon_system_pwr_off(PON_POWER_OFF_SHUTDOWN);
 
